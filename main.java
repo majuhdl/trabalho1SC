@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Scanner;
 
 public class main {
@@ -14,14 +15,17 @@ public class main {
         String entrada = scan.nextLine();
 
         System.out.println(chave);
-        try {
-            String str = ReadFile.readFile(entrada);
-            System.out.println(str);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
+
+        List<String> words = Cifrar.TrataChaveEntrada(entrada, chave);
+            
+        String entradaT = words.get(0);
+        String chaveT = words.get(1);
+
+        String chaveGerada = Cifrar.geraChave(entradaT, chaveT);
+        String textoCifrado = Cifrar.cifraTexto(entradaT, chaveGerada);
+
+        System.out.println("Ciphertext : " + textoCifrado + "\n");
+        System.out.println("Original/Decrypted Text : " + Cifrar.Decriptar(textoCifrado, chaveGerada));
 
     }
     
