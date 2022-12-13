@@ -25,8 +25,9 @@ public class main {
         String textoCifrado = Cifrar.cifraTexto(entradaT, chaveGerada);
 
         System.out.println("Ciphertext : " + textoCifrado + "\n");
-        System.out.println("Original/Decrypted Text : " + Cifrar.Decriptar(textoCifrado, chaveGerada));
+        System.out.println("Original/Decrypted Text : " + Cifrar.Decriptar(textoCifrado, chaveGerada) + "\n");
 
+        Attack.split(Attack.removeSimbolos(textoCifrado));
     }
     
 }
