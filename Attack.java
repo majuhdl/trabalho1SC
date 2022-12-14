@@ -1,10 +1,12 @@
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Collectors.*;
 
 public class Attack {
 
@@ -14,7 +16,7 @@ public class Attack {
         return textoSemEspaco;
     }
 
-    public static void split(String s) {
+    public static List<ListType> split(String s) {
         String sub, subTest;
 
         int i, j, k, flag = 0, repeat, num;
@@ -55,6 +57,74 @@ public class Attack {
         for(i=0; i<substrings.size(); i++){
             System.out.println(substrings.get(i).getKey()+ "  "+ substrings.get(i).getRepeat()+ "  " + substrings.get(i).getDistances()+ "  ");
         }
+
+        return substrings;
+        
+    }
+
+    public static int possibleKeySizes(List<ListType> list){
+        int i, j;
+
+        List<Integer> all = new ArrayList<>();
+        for(i=0; i<list.size(); i++){
+            List<Integer> ints = list.get(i).getDistances();
+            if(ints.size()>1){
+                for (j=0; j<ints.size()-1; j++){
+                    all.add(ints.get(j+1)-ints.get(j));
+                }
+            }
+
+        }
+
+        System.out.println(all);
+
+        final Map<Integer, Integer> result = new HashMap<>();
+        all.forEach(in -> result.merge(in, 1, Integer::sum));
+
+        List<Integer> mapKeys = new ArrayList<>(result.values());
+        Collections.sort(mapKeys);
+
+        System.out.println(result);
+        System.out.println(mapKeys);
+        
+        for(int key: result.keySet()) {
+            if(result.get(key).equals(mapKeys.get(mapKeys.size()-1))) {
+                return(key); 
+            }
+        }    
+
+        return 0;
+
+    }
+
+    public static void createTable(int keySize, String text){
+
+        int colNum = keySize;
+        int linNum;
+
+        if((text.length() % keySize) == 0){
+            linNum = text.length() / keySize;
+        } else {
+            linNum = (text.length() / keySize) + 1;
+        }
+
+        char[] ch = text.toCharArray();
+
+        char[][] matrix = new char[linNum][colNum];
+        for(int i = 1; i < linNum-1; i++){
+            for(int j = 0; j < colNum; j++){
+                matrix[i][j] = text.charAt(((i-1)*keySize)+j);
+            }
+        }
+
+        for(int i = 1; i < linNum-1; i++){
+            for(int j = 0; j < colNum; j++){
+                System.out.println(matrix[i][j] + " ");
+            }
+            System.out.println("\n");
+        }
+
+
     }
 
     static void mostFrequentWord(List<String> list, int n) {

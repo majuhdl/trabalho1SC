@@ -27,7 +27,12 @@ public class main {
         System.out.println("Ciphertext : " + textoCifrado + "\n");
         System.out.println("Original/Decrypted Text : " + Cifrar.Decriptar(textoCifrado, chaveGerada) + "\n");
 
-        Attack.split(Attack.removeSimbolos(Cifrar.cifraTexto(entradaT, chaveGerada)));
+        List<ListType> test = Attack.split(Attack.removeSimbolos(Cifrar.cifraTexto(entradaT, chaveGerada)));
+        int size = Attack.possibleKeySizes(test);
+        System.out.println(size);
+
+        Attack.createTable(size, Attack.removeSimbolos(Cifrar.cifraTexto(entradaT, chaveGerada)));
+
     }
     
 }
