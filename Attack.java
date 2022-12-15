@@ -125,7 +125,7 @@ public class Attack {
         }
 
         int k = 0, l, m;
-        int[] freq = new int[colNum];
+        int[] freq = new int[linNum];
         for(k=0; k<colNum; k++){
             char[] columnStr = new char[linNum];
             for(int i = 1; i < linNum-1; i++){
