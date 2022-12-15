@@ -124,6 +124,34 @@ public class Attack {
             System.out.println("\n");
         }
 
+        int k = 0, l, m;
+        int[] freq = new int[colNum];
+        for(k=0; k<colNum; k++){
+            char[] columnStr = new char[linNum];
+            for(int i = 1; i < linNum-1; i++){
+                for(int j = 0; j < colNum; j++){
+                    if(j == k) {
+                        columnStr[k] = matrix[i][j];
+                    }
+                }
+            }
+            for(l = 0; l<columnStr.length; l++){
+                freq[l] = 1;
+                for(m = l+1; m < columnStr.length; m++) {
+                    if(columnStr[l] == columnStr[m]) {
+                        freq[l]++;
+                        columnStr[m]= '0';
+                    }
+                }
+            }
+
+            for(int i=0; i<columnStr.length; i++){
+                if(columnStr[i] != ' ' && columnStr[i] != '0'){
+                    System.out.println(columnStr[i]+freq[i]);
+                }
+            }
+
+        }
 
     }
 
@@ -152,5 +180,73 @@ public class Attack {
         System.out.println("Chave: " + chave);
         System.out.println("Texto: \n" + Cifrar.Decriptar(texto, chave));
     }
+
+    public Map<Character, Double> createsListsFreq(int language) {
+
+        int ingles = 1;
+
+        final Map<Character, Double> freq = new HashMap<>();
+        if (language == ingles) {
+            freq.put('a', 0.08167);
+            freq.put('b', 0.01492);
+            freq.put('c', 0.02782);
+            freq.put('d', 0.04253);
+            freq.put('e', 0.12702);
+            freq.put('f', 0.02228);
+            freq.put('g', 0.02015);
+            freq.put('h', 0.06094);
+            freq.put('i', 0.06966);
+            freq.put('j', 0.00153);
+            freq.put('k', 0.00772);
+            freq.put('l', 0.04025);
+            freq.put('m', 0.02406);
+            freq.put('n', 0.06749);
+            freq.put('o', 0.07507);
+            freq.put('p', 0.01929);
+            freq.put('q', 0.00095);
+            freq.put('r', 0.05987);
+            freq.put('s', 0.06327);
+            freq.put('t', 0.09056);
+            freq.put('u', 0.02758);
+            freq.put('v', 0.00978);
+            freq.put('w', 0.02360);
+            freq.put('x', 0.00150);
+            freq.put('y', 0.01974);
+            freq.put('z', 0.00074);
+
+            return freq;
+        } else {
+            freq.put('a', 0.1463);
+            freq.put('b', 0.0104);
+            freq.put('c', 0.0388);
+            freq.put('d', 0.0499);
+            freq.put('e', 0.1257);
+            freq.put('f', 0.0102);
+            freq.put('g', 0.0130);
+            freq.put('h', 0.0128);
+            freq.put('i', 0.0618);
+            freq.put('j', 0.0040);
+            freq.put('k', 0.0002);
+            freq.put('l', 0.0278);
+            freq.put('m', 0.0474);
+            freq.put('n', 0.0505);
+            freq.put('o', 0.1073);
+            freq.put('p', 0.0252);
+            freq.put('q', 0.0120);
+            freq.put('r', 0.0653);
+            freq.put('s', 0.0781);
+            freq.put('t', 0.0434);
+            freq.put('u', 0.0463);
+            freq.put('v', 0.0167);
+            freq.put('w', 0.0001);
+            freq.put('x', 0.0021);
+            freq.put('y', 0.0001);
+            freq.put('z', 0.0047);
+
+            return freq;
+        }
     
+    }
+
+
 }
