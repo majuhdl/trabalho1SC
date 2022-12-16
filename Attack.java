@@ -22,12 +22,12 @@ public class Attack {
         int i, j, k, flag = 0, repeat, num;
         List<ListType> substrings = new ArrayList<ListType>();
 
-        for(i = 0; i<s.length()-2; i++){
+        for(i = 0; i<s.length()-0; i++){
             repeat = 0;
             flag = 0;
             List<Integer> ints = new ArrayList<Integer>();
 
-            sub = s.substring(i, i+3);
+            sub = s.substring(i, i+1);
             for(k=0; k<substrings.size(); k++){
                 if(substrings.get(k).getKey().equals(sub)){
                     flag = 1;
@@ -36,16 +36,11 @@ public class Attack {
             }
 
             if(flag == 0){
-                for(j = 0; j<s.length()-2; j++){
-                    subTest = s.substring(j, j+3);
+                for(j = 0; j<s.length()-0; j++){
+                    subTest = s.substring(j, j+1);
                     if (sub.equals(subTest)) {
                         repeat++;
-                        num = j-i+2;
-                        if(num == 2){
-                            ints.add(0);
-                        } else {
-                            ints.add(num);
-                        }
+                        ints.add(j);
                     }
                 }
 
@@ -139,13 +134,17 @@ public class Attack {
         char[] ch = text.toCharArray();
 
         char[][] matrix = new char[linNum][colNum];
-        for(int i = 1; i < linNum-1; i++){
+        for(int i = 0; i < linNum; i++){
             for(int j = 0; j < colNum; j++){
-                matrix[i][j] = text.charAt(((i-1)*keySize)+j);
+                if(((i*keySize)+j) < text.length()){
+                    matrix[i][j] = text.charAt(((i)*keySize)+j);
+                } else {
+                    matrix[i][j] = ' ';
+                }
             }
         }
 
-        for(int i = 1; i < linNum-1; i++){
+        for(int i = 0; i < linNum; i++){
             for(int j = 0; j < colNum; j++){
                 System.out.println(matrix[i][j] + " ");
             }
